@@ -38,10 +38,10 @@ namespace Test
         /// <returns></returns>
         public static byte[] HashNTimes(byte[] data, int n)
         {
-            byte[] result = null;
+            byte[] result = data;
             for (int i = 0; i < n; i++)
             {
-                result = Hash(data);
+                result = Hash(result);
             }
             return result;
         }
