@@ -14,13 +14,16 @@ namespace Test
     public partial class MainWindow : Form
     {
         private StringBuilder sb;
-        public LoginWindow lw;
+        public CommunicationModule cm;
+        //public LoginWindow lw;
 
-        public MainWindow(LoginWindow lw)
+        public MainWindow()
         {
-            this.lw = lw;
+            //this.lw = lw;
+            cm = new CommunicationModule();
             sb = new StringBuilder();
             InitializeComponent();
+            EnableDisableControls(false);
         }
 
         private void ConnectMethod() 
@@ -85,10 +88,21 @@ namespace Test
             Log.AppendText("\n");
         }
 
-        private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
+        /// <summary>
+        /// Metoda włączająca/wyłączajaca kontrolki (przyciski, textbox)
+        /// </summary>
+        /// <param name="enabled">
+        /// True - włączone
+        /// False - wyłączone
+        /// </param>
+        internal void EnableDisableControls(bool enabled)
         {
-            lw.Close();
+            this.ConnectBtn.Enabled = enabled;
+            this.ConInputTextBox.ReadOnly = (!enabled);
+            this.OnlineBtn.Enabled = enabled;
+        
         }
+        
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
@@ -113,6 +127,17 @@ namespace Test
                 e.Handled = true;
                 ConnectMethod();
             }
+        }
+
+        internal void DisableLogBtn() 
+        {
+            this.LogBtn.Enabled = false;
+        }
+
+        private void LogBtn_Click(object sender, EventArgs e)
+        {
+            EnableDisableControls(false);
+            new LoginWindow(this).Show();
         }
 
     }

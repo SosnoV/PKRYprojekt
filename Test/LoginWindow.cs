@@ -16,18 +16,16 @@ namespace Test
     /// </summary>
     public partial class LoginWindow : Form
     {
-        /// <summary>
-        /// Obiekt odpowiedzialny za komunikację między modułami
-        /// </summary>
-        public CommunicationModule cm;
+
+        private MainWindow mw;
 
         /// <summary>
         /// Konstruktor
         /// </summary>
-        public LoginWindow()
+        public LoginWindow(MainWindow mw)
         {
             //odwołanie w ChatWindow: mw.lw.cm
-            cm = new CommunicationModule();
+            this.mw = mw;
             InitializeComponent();
         }
 
@@ -60,9 +58,12 @@ namespace Test
                         //Udane logowanie, czekam na certyfikat
                         StatusLabel.Text = "Waiting for certificate";
                         //Otrzymany certyfikat
-                        MainWindow mw = new MainWindow(this);
-                        this.Hide();
-                        mw.Show();
+                        //MainWindow mw = new MainWindow(this);
+                        mw.EnableDisableControls(true);
+                        mw.DisableLogBtn();
+                        mw.WriteInLog("Logged in!");
+                        this.Close();
+                        //mw.Show();
                     }
                     else
                     {

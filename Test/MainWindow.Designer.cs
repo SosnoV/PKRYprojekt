@@ -35,6 +35,7 @@
             this.ConnectBtnToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.OnlineBtn = new System.Windows.Forms.Button();
             this.OnlineBtnToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.LogBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ConnectBtn
@@ -77,19 +78,30 @@
             this.OnlineBtn.UseVisualStyleBackColor = true;
             this.OnlineBtn.Click += new System.EventHandler(this.button1_Click);
             // 
+            // LogBtn
+            // 
+            this.LogBtn.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.LogBtn.Location = new System.Drawing.Point(237, 12);
+            this.LogBtn.Name = "LogBtn";
+            this.LogBtn.Size = new System.Drawing.Size(108, 49);
+            this.LogBtn.TabIndex = 4;
+            this.LogBtn.Text = "LOGIN";
+            this.LogBtn.UseVisualStyleBackColor = true;
+            this.LogBtn.Click += new System.EventHandler(this.LogBtn_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(355, 306);
+            this.Controls.Add(this.LogBtn);
             this.Controls.Add(this.OnlineBtn);
             this.Controls.Add(this.Log);
             this.Controls.Add(this.ConInputTextBox);
             this.Controls.Add(this.ConnectBtn);
             this.Name = "MainWindow";
             this.Text = "Test";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainWindow_FormClosed);
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -104,6 +116,7 @@
         private System.Windows.Forms.ToolTip ConnectBtnToolTip;
         private System.Windows.Forms.Button OnlineBtn;
         private System.Windows.Forms.ToolTip OnlineBtnToolTip;
+        private System.Windows.Forms.Button LogBtn;
     }
 }
 
