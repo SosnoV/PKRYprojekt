@@ -8,6 +8,8 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Test
 {
@@ -24,7 +26,7 @@ namespace Test
         /// </summary>
         public LoginWindow(MainWindow mw)
         {
-            //odwołanie w ChatWindow: mw.lw.cm
+            //odwołanie w ChatWindow: lw.cm
             this.mw = mw;
             InitializeComponent();
         }
@@ -35,46 +37,56 @@ namespace Test
         private void LoginMethod()
         {
             if (PwdTextBox.Text != "" && LoginTextBox.Text != "")
-            {//start if
+            {
+                //Zebranie danych z pol okna logowania
                 string login = LoginTextBox.Text;
                 string pwd = PwdTextBox.Text;
+                //Zaszyfrowanie hasla i usuniecie z pamieci
                 byte[] pwdArray = BindingModule.enc.GetBytes(pwd);
                 StatusLabel.Text = "Login in progress";
                 pwd = "";
                 PwdTextBox.ResetText();
-                //send login and wait for n
-                int n = 1;
-                if (n == -1)//Błędny login
+                //Uruchomienie modulu komunkacji
+                if (!mw.cm.Run("localhost", "pkryserver.jumpingcrab.com"))
                 {
-                    StatusLabel.Text = "Signing in failed";
+                    StatusLabel.Text = "Signing in failed before";
+                    return;
                 }
-                else //else1
+                //Wyslanie loginu i oczekiwanie na odp
+                int n = mw.cm.SendLogin(login);
+                //Reakcja na bledny login
+                if (n == 0)
                 {
-                    pwdArray = CryptoModule.HashNTimes(pwdArray, n);
-                    //send pwdArray
-                    //Poczekaj na odpowiedz
-
-                    bool response = true;
-                    if (response)
+                    StatusLabel.Text = "Signing in failed, wrong login";
+                    mw.cm.Stop();
+                }
+                //Poprawny login hashowanie i wyslanie hasla
+                else
+                {
+                    pwdArray = CryptoModule.HashNTimes(pwdArray, --n);
+                    if (mw.cm.SendPwd(pwdArray))
                     {
                         BindingModule.setLogin(login);
                         //Udane logowanie, czekam na certyfikat
                         StatusLabel.Text = "Waiting for certificate";
                         //Otrzymany certyfikat
-                        //MainWindow mw = new MainWindow(this);
+                        byte[] certificateRawData = mw.cm.GetCertificate();
+                        X509Certificate2 certificate = CryptoModule.CreatePrivateCertFromRawData(certificateRawData);
+                        CryptoModule.ImportKey(certificate, true, false);
+                        CryptoModule.ImportKey(certificate, !true, !false);
+
                         mw.EnableDisableControls(true);
                         mw.DisableLogBtn();
                         mw.WriteInLog("Logged in!");
+                        mw.cm.Run();
                         this.Close();
-                        //mw.Show();
                     }
                     else
                     {
-                        StatusLabel.Text = "Signing in failed";
+                        StatusLabel.Text = "Signing in failed, wrong password";
                     }
-                }//end else1
-
-            }//end if
+                }
+            }
             else
             {
                 StatusLabel.Text = "Need more data to proceed";

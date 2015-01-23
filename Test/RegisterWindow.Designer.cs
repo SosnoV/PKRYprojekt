@@ -116,7 +116,7 @@
             // maskedTextBox1
             // 
             this.maskedTextBox1.Location = new System.Drawing.Point(80, 64);
-            this.maskedTextBox1.Mask = "000000000";
+            this.maskedTextBox1.Mask = "0000000000";
             this.maskedTextBox1.Name = "maskedTextBox1";
             this.maskedTextBox1.Size = new System.Drawing.Size(144, 20);
             this.maskedTextBox1.TabIndex = 9;

@@ -18,6 +18,7 @@ namespace Test
     {
         private StringBuilder sb;
         public CommunicationModule cm;
+        public bool isChatOpen = false;
         //public LoginWindow lw;
 
         /// <summary>
@@ -27,16 +28,25 @@ namespace Test
         {
             //this.lw = lw;
             cm = new CommunicationModule();
+            cm.msgSignal += new MsgSignal(MsgService);
             sb = new StringBuilder();
             InitializeComponent();
             EnableDisableControls(false);
         }
-
+        private void MsgService(object sender, MsgEvent e)
+        {
+            
+        }
         /// <summary>
         /// Metoda odpowiedzialna za procedurę połączenia z innym użytkownikiem
         /// </summary>
         private void ConnectMethod() 
         {
+            if (isChatOpen == true)
+            {
+                WriteInLog("Can't open another session");
+                return;
+            }
             if (ConInputTextBox.Text.Equals("")) //Pusty TextBox
                 return;
             string login = ConInputTextBox.Text;
@@ -84,7 +94,9 @@ namespace Test
                 msg = sb.ToString();
                 WriteInLog(msg);
                 //Wyswietlenie okna czatu
-                BindingModule.AddChat(login, this);
+                ChatWindow chat = new ChatWindow(login, this);
+                chat.Show();
+                //BindingModule.AddChat(login, this);
             }
         }
         /// <summary>
@@ -182,6 +194,11 @@ namespace Test
         {
             //EnableDisableControls(false);
             new LoginWindow(this).Show();
+        }
+        private void MainWindow_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            cm.StopListening();
+            cm.Stop();
         }
 
     }

@@ -16,7 +16,9 @@ namespace Test
     /// </summary>
     public partial class ChatWindow : Form
     {
-        //odwołanie do CommunicationModule: mw.lw.cm
+        /// <summary>
+        /// Encoder
+        /// </summary>
         Encoding enc = Encoding.UTF8;
         StringBuilder sb;
         private bool areCharsOver; //czy wiadomosc ma ponad 160 znakow
@@ -37,6 +39,7 @@ namespace Test
         {
             sb = new StringBuilder();
             this.mw = mw;
+            mw.isChatOpen = true;
             otherUser = login;
             InitializeComponent();
             areCharsOver = true;
@@ -150,7 +153,8 @@ namespace Test
         /// <param name="e"></param>
         private void ChatWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
-            BindingModule.RemoveUserChatAndKey(otherUser);
+            BindingModule.RemoveUserKey(otherUser);
+            mw.isChatOpen = false;
             mw.WriteInLog("Ended chat session with: " + otherUser);
         }
         /// <summary>

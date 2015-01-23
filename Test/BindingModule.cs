@@ -11,11 +11,11 @@ namespace Test
     /// </summary>
     class BindingModule
     {
-        /// <summary>
-        /// Kolekcja aktywnych czatów
-        /// </summary>
-        private static Dictionary<string, ChatWindow> activeChats = 
-            new Dictionary<string,ChatWindow>();
+        ///// <summary>
+        ///// Kolekcja aktywnych czatów
+        ///// </summary>
+        //private static Dictionary<string, ChatWindow> activeChats = 
+        //    new Dictionary<string,ChatWindow>();
 
         public static Encoding enc = Encoding.UTF8;
         /// <summary>
@@ -64,55 +64,55 @@ namespace Test
         /// Login użytkownika z którym prowadzona jest rozmowa w szukanym czacie
         /// </param>
         /// <returns></returns>
-        public static ChatWindow GetChat(string userName)
-        {
-            ChatWindow ch;
-            if (!activeChats.TryGetValue(userName, out ch))
-                return null;
-            return ch;
-        }
+        //public static ChatWindow GetChat(string userName)
+        //{
+        //    ChatWindow ch;
+        //    if (!activeChats.TryGetValue(userName, out ch))
+        //        return null;
+        //    return ch;
+        //}
 
+        ///// <summary>
+        ///// Dodanie czatu do kolekcji
+        ///// </summary>
+        ///// <param name="userName"></param>
+        ///// <param name="mw"></param>
+        //public static void AddChat(string userName, MainWindow mw) 
+        //{
+        //    //na wypadek 2 rozmowy w czasie dzialania programu, jakby cos sie nie usunelo
+        //    try
+        //    {
+        //        activeChats.Remove(userName);
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //    }
+        //    finally
+        //    {
+        //        ChatWindow chat = new ChatWindow(userName, mw);
+        //        activeChats.Add(userName, chat);
+        //        chat.Show();
+        //    }
+        //}
         /// <summary>
-        /// Dodanie czatu do kolekcji
+        /// Usunięcie klucza publicznego z pamięci programu
         /// </summary>
         /// <param name="userName"></param>
-        /// <param name="mw"></param>
-        public static void AddChat(string userName, MainWindow mw) 
+        public static void RemoveUserKey(string userName) 
         {
-            //na wypadek 2 rozmowy w czasie dzialania programu, jakby cos sie nie usunelo
-            try
-            {
-                activeChats.Remove(userName);
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                ChatWindow chat = new ChatWindow(userName, mw);
-                activeChats.Add(userName, chat);
-                chat.Show();
-            }
-        }
-        /// <summary>
-        /// Usunięcie czatu z kolekcji oraz usunięcie klucza publicznego z pamięci programu
-        /// </summary>
-        /// <param name="userName"></param>
-        public static void RemoveUserChatAndKey(string userName) 
-        {
-            activeChats.Remove(userName);
+            //activeChats.Remove(userName);
             CryptoModule.RemoveUserKey(userName);
         }
 
 
 
-        public static void CloseChats()
-        {
-            foreach (var chat in activeChats)
-            {
-                chat.Value.Close();
-            }
-        }
+        //public static void CloseChats()
+        //{
+        //    foreach (var chat in activeChats)
+        //    {
+        //        chat.Value.Close();
+        //    }
+        //}
     }
 }
