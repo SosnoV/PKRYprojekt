@@ -11,12 +11,18 @@ using System.Windows.Forms;
 
 namespace Test
 {
+    /// <summary>
+    /// Klasa odpowiedzialna za główne okno aplikacji
+    /// </summary>
     public partial class MainWindow : Form
     {
         private StringBuilder sb;
         public CommunicationModule cm;
         //public LoginWindow lw;
 
+        /// <summary>
+        /// Konstrukto klasy MainWindow
+        /// </summary>
         public MainWindow()
         {
             //this.lw = lw;
@@ -26,11 +32,20 @@ namespace Test
             EnableDisableControls(false);
         }
 
+        /// <summary>
+        /// Metoda odpowiedzialna za procedurę połączenia z innym użytkownikiem
+        /// </summary>
         private void ConnectMethod() 
         {
             if (ConInputTextBox.Text.Equals("")) //Pusty TextBox
                 return;
             string login = ConInputTextBox.Text;
+            if (login.Equals(BindingModule.myLogin))
+            {
+                WriteInLog("Can't talk with yourself");
+                ConInputTextBox.ResetText();
+                return;
+            }
             sb.Clear();
             sb.Append("Trying to connect with: ").Append(login);
             string msg = sb.ToString();
@@ -72,13 +87,23 @@ namespace Test
                 BindingModule.AddChat(login, this);
             }
         }
-        //Obsluga eventu klikniecia w Connect Button
+        /// <summary>
+        /// Metoda obsługująca zdarzenie kliknięcia w przycisk ConnectBtn
+        /// W szczególności wywoływana jest metoda ConnectMethod()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConnectBtn_Click(object sender, EventArgs e)
         {
             ConnectMethod();            
         }
 
-        //Metoda do wyswietlania stringow w RichTextBox Log
+        /// <summary>
+        /// Metoda wyświetlająca komunikat w Log
+        /// </summary>
+        /// <param name="msg">
+        /// Komunikat do wyświetlenia
+        /// </param>
         public void WriteInLog(string msg)
         {
             sb.Clear();
@@ -103,7 +128,11 @@ namespace Test
         
         }
         
-
+        /// <summary>
+        /// Metoda obsługująca zdarzenie ładowania komponentu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainWindow_Load(object sender, EventArgs e)
         {
             ConnectBtnToolTip.SetToolTip(this.ConnectBtn, "Press to connect");
@@ -120,6 +149,12 @@ namespace Test
             WriteInLog("Online:\n" + onlinelist);
         }
 
+        /// <summary>
+        /// Metoda obsługująca zdarzenie wciśnięcia klawisza w ConInputTextBox
+        /// W szczególności wciśnięcie klawisza Enter powoduje wywołanie metody ConnectMethod()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConInputTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
@@ -129,14 +164,23 @@ namespace Test
             }
         }
 
+        /// <summary>
+        /// Metoda wyłączająca przycisk LoginBtn
+        /// </summary>
         internal void DisableLogBtn() 
         {
             this.LogBtn.Enabled = false;
         }
 
+        /// <summary>
+        /// Metoda obsługująca zdarzenie kliknięcia w przycisk LogBtn
+        /// W szczególności wywołuje ona LoginWindow co pozwala na przeprowadzenie procedury logowania
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LogBtn_Click(object sender, EventArgs e)
         {
-            EnableDisableControls(false);
+            //EnableDisableControls(false);
             new LoginWindow(this).Show();
         }
 

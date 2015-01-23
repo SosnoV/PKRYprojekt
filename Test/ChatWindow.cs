@@ -28,7 +28,8 @@ namespace Test
         private bool isDisconnected;
 
         /// <summary>
-        /// Konstruktor
+        /// Konstruktor klasy ChatWindow
+        /// 
         /// </summary>
         /// <param name="login"> Login użytkownika, z którym trwa sesja komunikacyjna</param>
         /// <param name="mw"></param>

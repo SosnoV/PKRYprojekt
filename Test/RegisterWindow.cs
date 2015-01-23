@@ -10,13 +10,24 @@ using System.Windows.Forms;
 
 namespace Test
 {
+    /// <summary>
+    /// Klasa odpowiedzialna za okno rejestracji
+    /// </summary>
     public partial class RegisterWindow : Form
     {
+        /// <summary>
+        /// Konstruktor klasy RegisterWindow
+        /// </summary>
         public RegisterWindow()
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Metoda obsługująca zdarzenie kliknięcia w przycisk RegisterBtn
+        /// Metoda jest odpowiedzialna za procedurę rejestracji nowego użytkownika
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RegisterBtn_Click(object sender, EventArgs e)
         {
             string login, pwd, pesel;

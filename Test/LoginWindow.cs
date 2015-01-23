@@ -20,7 +20,7 @@ namespace Test
         private MainWindow mw;
 
         /// <summary>
-        /// Konstruktor
+        /// Konstruktor klasy LoginWindow
         /// </summary>
         public LoginWindow(MainWindow mw)
         {
@@ -29,6 +29,9 @@ namespace Test
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Metoda służąca do przeprowadzenia procedury logowania
+        /// </summary>
         private void LoginMethod()
         {
             if (PwdTextBox.Text != "" && LoginTextBox.Text != "")

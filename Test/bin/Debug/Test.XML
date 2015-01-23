@@ -4,9 +4,20 @@
         <name>Test</name>
     </assembly>
     <members>
+        <member name="T:Test.ChatWindow">
+            <summary>
+            Klasa definiująca okno czat
+            </summary>
+        </member>
+        <member name="F:Test.ChatWindow.otherUser">
+            <summary>
+            Login użtykownika z którym prowadzona jest rozmowa
+            </summary>
+        </member>
         <member name="M:Test.ChatWindow.#ctor(System.String,Test.MainWindow)">
             <summary>
-            Konstruktor
+            Konstruktor klasy ChatWindow
+            
             </summary>
             <param name="login"> Login użytkownika, z którym trwa sesja komunikacyjna</param>
             <param name="mw"></param>
@@ -48,6 +59,35 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
+        <member name="M:Test.ChatWindow.ChatWindow_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie zamykania okna czatu
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.ChatWindow.DisconnectBtn_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie Click wygenerowane przez przycisk DisconnectBtn
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.ChatWindow.ChatWindow_Load(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie ładowania się okna czatu
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.ChatWindow.MsgTextBox_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie KeyPress wygenerowane przez MsgTextBox
+            Powoduje wysłanie wiadomości w przypadku kliknięcia Enter
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
         <member name="F:Test.ChatWindow.components">
             <summary>
             Required designer variable.
@@ -65,6 +105,74 @@
             the contents of this method with the code editor.
             </summary>
         </member>
+        <member name="T:Test.MainWindow">
+            <summary>
+            Klasa odpowiedzialna za główne okno aplikacji
+            </summary>
+        </member>
+        <member name="M:Test.MainWindow.#ctor">
+            <summary>
+            Konstrukto klasy MainWindow
+            </summary>
+        </member>
+        <member name="M:Test.MainWindow.ConnectMethod">
+            <summary>
+            Metoda odpowiedzialna za procedurę połączenia z innym użytkownikiem
+            </summary>
+        </member>
+        <member name="M:Test.MainWindow.ConnectBtn_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie kliknięcia w przycisk ConnectBtn
+            W szczególności wywoływana jest metoda ConnectMethod()
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.MainWindow.WriteInLog(System.String)">
+            <summary>
+            Metoda wyświetlająca komunikat w Log
+            </summary>
+            <param name="msg">
+            Komunikat do wyświetlenia
+            </param>
+        </member>
+        <member name="M:Test.MainWindow.EnableDisableControls(System.Boolean)">
+            <summary>
+            Metoda włączająca/wyłączajaca kontrolki (przyciski, textbox)
+            </summary>
+            <param name="enabled">
+            True - włączone
+            False - wyłączone
+            </param>
+        </member>
+        <member name="M:Test.MainWindow.MainWindow_Load(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie ładowania komponentu
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.MainWindow.ConInputTextBox_KeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie wciśnięcia klawisza w ConInputTextBox
+            W szczególności wciśnięcie klawisza Enter powoduje wywołanie metody ConnectMethod()
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.MainWindow.DisableLogBtn">
+            <summary>
+            Metoda wyłączająca przycisk LoginBtn
+            </summary>
+        </member>
+        <member name="M:Test.MainWindow.LogBtn_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie kliknięcia w przycisk LogBtn
+            W szczególności wywołuje ona LoginWindow co pozwala na przeprowadzenie procedury logowania
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
         <member name="F:Test.MainWindow.components">
             <summary>
             Required designer variable.
@@ -80,6 +188,16 @@
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Test.LoginWindow">
+            <summary>
+            Klasa definiująca okno logowania
+            </summary>
+        </member>
+        <member name="M:Test.LoginWindow.#ctor(Test.MainWindow)">
+            <summary>
+            Konstruktor
             </summary>
         </member>
         <member name="F:Test.LoginWindow.components">
@@ -103,6 +221,24 @@
             <summary>
             The main entry point for the application.
             </summary>
+        </member>
+        <member name="T:Test.RegisterWindow">
+            <summary>
+            Klasa odpowiedzialna za okno rejestracji
+            </summary>
+        </member>
+        <member name="M:Test.RegisterWindow.#ctor">
+            <summary>
+            Konstruktor klasy RegisterWindow
+            </summary>
+        </member>
+        <member name="M:Test.RegisterWindow.RegisterBtn_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie kliknięcia w przycisk RegisterBtn
+            Metoda jest odpowiedzialna za procedurę rejestracji nowego użytkownika
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
         </member>
         <member name="F:Test.RegisterWindow.components">
             <summary>

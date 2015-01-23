@@ -9,6 +9,9 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace Test
 {
+    /// <summary>
+    /// Klasa odpowiedzialna za całą funkcjonalność związaną z kryptografią
+    /// </summary>
     class CryptoModule
     {
         private static Encoding enc = Encoding.UTF8;
@@ -19,11 +22,7 @@ namespace Test
         private static RSACryptoServiceProvider myPublicKey = null;
         private static Dictionary<string, RSACryptoServiceProvider> otherPublicKeys = new Dictionary<string, RSACryptoServiceProvider>();
 
-        //public CryptoModule() 
-        //{
-        //    otherPublicKeys = new Dictionary<string, RSACryptoServiceProvider>();
-        //    sha1Provider = new SHA1CryptoServiceProvider();
-        //}
+
 
         public static byte[] HashMessage(string message)
         {
@@ -31,7 +30,12 @@ namespace Test
             Byte[] dataToHash = enc.GetBytes(message);
             return sha1Provider.ComputeHash(dataToHash);
         }
-
+        /// <summary>
+        /// Metoda licząca hash z bajtów n razy
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
         public static byte[] HashNTimes(byte[] data, int n)
         {
             byte[] result = null;
@@ -41,28 +45,53 @@ namespace Test
             }
             return result;
         }
+        /// <summary>
+        /// Metoda licząca hash z podanych bajtów
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public static byte[] Hash(byte[] data)
         {
             return sha1Provider.ComputeHash(data);
         }
-
+        /// <summary>
+        /// Metoda weryfikująca podpisaną wiadomość
+        /// </summary>
+        /// <param name="decryptedMsg"></param>
+        /// <param name="signedMsg"></param>
+        /// <param name="senderName"></param>
+        /// <returns></returns>
         public static bool Verify(byte[] decryptedMsg, byte[] signedMsg, string senderName)
         {
             RSACryptoServiceProvider csp;
             otherPublicKeys.TryGetValue(senderName, out csp);
             return csp.VerifyData(decryptedMsg, hashFunctionVersion, signedMsg);
         }
-
+        /// <summary>
+        /// Metoda podpisująca wiadomość
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
         public static byte[] Sign(string msg)
         {
             return myPrivateKey.SignData(enc.GetBytes(msg), hashFunctionVersion);
         }
-
+        /// <summary>
+        /// Metoda odszyfrowująca wiadomość
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <returns></returns>
         public static byte[] DecryptMsg(byte[] msg)
         {
             return myPrivateKey.Decrypt(msg, true);
         }
-
+        
+        /// <summary>
+        /// Metoda szyfrująca wiadomość
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="receiverName"></param>
+        /// <returns></returns>
         public static byte[] EncryptMsg(byte[] msg, string receiverName)
         {
             RSACryptoServiceProvider csp;
@@ -71,7 +100,17 @@ namespace Test
             return csp.Encrypt(msg, true);
         }
 
-        //Import key from certificate
+        /// <summary>
+        /// Metoda importująca klucze (prywatne lub publiczne) z certyfikatu
+        /// </summary>
+        /// <param name="cert"></param>
+        /// <param name="isPrivate">
+        /// true - import klucza prywatnego
+        /// </param>
+        /// <param name="isMine">
+        /// true - import publicznego klucza zalogowanego użytkownika
+        /// false - import publicznego klucza innego użytkownika
+        /// </param>
         public static void ImportKey(X509Certificate2 cert, bool isPrivate, bool isMine)
         {
             if (isPrivate)
@@ -89,18 +128,29 @@ namespace Test
             }
 
         }
-
+        /// <summary>
+        /// Metoda usuwająca z pamięci klucz użytkownika
+        /// </summary>
+        /// <param name="userName"></param>
         public static void RemoveUserKey(string userName)
         {
             otherPublicKeys.Remove(userName);
         }
-
+        /// <summary>
+        /// Metoda tworząca certyfikat z kluczem publicznym z przesłanych bajtów
+        /// </summary>
+        /// <param name="rawData"></param>
+        /// <returns></returns>
         public static X509Certificate2 CreatePublicCertFromRawData(byte[] rawData)
         {
             X509Certificate2 cert = new X509Certificate2(rawData);
             return cert;
         }
-
+        /// <summary>
+        /// Metoda tworząca certyfikat z parą kluczy z przesłanych bajtów
+        /// </summary>
+        /// <param name="rawData"></param>
+        /// <returns></returns>
         public static X509Certificate2 CreatePrivateCertFromRawData(byte[] rawData)
         {
             X509Certificate2 cert = new X509Certificate2(rawData, "pwd", X509KeyStorageFlags.Exportable);
