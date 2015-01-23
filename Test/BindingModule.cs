@@ -15,6 +15,28 @@ namespace Test
         public static Encoding enc = Encoding.UTF8;
         public static string myLogin { get; private set; }
 
+        public static bool CheckPesel(string pesel) 
+        {
+            if (pesel.Length != 10)
+                return false;
+            bool result = false;
+            int[] parameters = { 1, 3, 7, 9, 1, 3, 7, 9, 1, 3 };
+            char[] array = pesel.ToCharArray();
+            int sum = 0;
+            int controlNumber = -1;
+            for (int i = 0; i < 10; i++)
+            {
+                sum += parameters[i] * int.Parse(array[i].ToString());
+                if(i == 9)
+                    controlNumber = int.Parse(array[i].ToString());
+            }
+            sum = sum % 10;
+            if (sum != 0)
+                sum = 10 - sum;
+            if (sum == controlNumber)
+                result = true;
+            return result;
+        }
         public static void setLogin(string login)
         {
             myLogin = login;
