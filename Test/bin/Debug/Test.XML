@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Test</name>
+    </assembly>
+    <members>
+        <member name="M:Test.ChatWindow.#ctor(System.String,Test.MainWindow)">
+            <summary>
+            Konstruktor
+            </summary>
+            <param name="login"> Login użytkownika, z którym trwa sesja komunikacyjna</param>
+            <param name="mw"></param>
+        </member>
+        <member name="M:Test.ChatWindow.WriteInLogAsThisUser(System.String)">
+            <summary>
+            Metoda wyświetlająca wiadomość napisaną przez użytkownika
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:Test.ChatWindow.WriteInLog(System.String)">
+            <summary>
+            Metoda wyświetlająca tekst w oknie czatu
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:Test.ChatWindow.WriteInLogAsOtherUser(System.String)">
+            <summary>
+            Metoda wyświetlająca wiadomość od innego użytkownika
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:Test.ChatWindow.SendBtn_Click(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie Click wygenerowane przez przycisk SendBtn
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:Test.ChatWindow.TextToSendMethod">
+            <summary>
+            Metoda wysyłająca wiadomość użytkownika
+            </summary>
+        </member>
+        <member name="M:Test.ChatWindow.MsgTextBox_TextChanged(System.Object,System.EventArgs)">
+            <summary>
+            Metoda obsługująca zdarzenie TextChanged
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="F:Test.ChatWindow.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Test.ChatWindow.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Test.ChatWindow.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:Test.MainWindow.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Test.MainWindow.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Test.MainWindow.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:Test.LoginWindow.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Test.LoginWindow.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Test.LoginWindow.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:Test.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="F:Test.RegisterWindow.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:Test.RegisterWindow.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:Test.RegisterWindow.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:Test.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Test.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Test.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>
