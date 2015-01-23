@@ -6,15 +6,27 @@ using System.Threading.Tasks;
 
 namespace Test
 {
-    
+    /// <summary>
+    /// Klasa pomocnicza przenosząca dane między obiektami różnych klas
+    /// </summary>
     class BindingModule
     {
+        /// <summary>
+        /// Kolekcja aktywnych czatów
+        /// </summary>
         private static Dictionary<string, ChatWindow> activeChats = 
             new Dictionary<string,ChatWindow>();
 
         public static Encoding enc = Encoding.UTF8;
+        /// <summary>
+        /// Login użytkownika
+        /// </summary>
         public static string myLogin { get; private set; }
-
+        /// <summary>
+        /// Metoda sprawdzająca poprawność peselu
+        /// </summary>
+        /// <param name="pesel"></param>
+        /// <returns></returns>
         public static bool CheckPesel(string pesel) 
         {
             if (pesel.Length != 10)
@@ -37,11 +49,21 @@ namespace Test
                 result = true;
             return result;
         }
+        /// <summary>
+        /// Metoda ustawiająca login
+        /// </summary>
+        /// <param name="login"></param>
         public static void setLogin(string login)
         {
             myLogin = login;
         }
-
+        /// <summary>
+        /// Metoda do wyciągnięcia czatu z kolekcji
+        /// </summary>
+        /// <param name="userName">
+        /// Login użytkownika z którym prowadzona jest rozmowa w szukanym czacie
+        /// </param>
+        /// <returns></returns>
         public static ChatWindow GetChat(string userName)
         {
             ChatWindow ch;
@@ -50,6 +72,11 @@ namespace Test
             return ch;
         }
 
+        /// <summary>
+        /// Dodanie czatu do kolekcji
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="mw"></param>
         public static void AddChat(string userName, MainWindow mw) 
         {
             //na wypadek 2 rozmowy w czasie dzialania programu, jakby cos sie nie usunelo
@@ -68,7 +95,10 @@ namespace Test
                 chat.Show();
             }
         }
-
+        /// <summary>
+        /// Usunięcie czatu z kolekcji oraz usunięcie klucza publicznego z pamięci programu
+        /// </summary>
+        /// <param name="userName"></param>
         public static void RemoveUserChatAndKey(string userName) 
         {
             activeChats.Remove(userName);
