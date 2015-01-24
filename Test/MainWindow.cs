@@ -19,6 +19,7 @@ namespace Test
         private StringBuilder sb;
         public CommunicationModule cm;
         public bool isChatOpen = false;
+        private ChatWindow chat;
         //public LoginWindow lw;
 
         /// <summary>
@@ -94,7 +95,7 @@ namespace Test
                 msg = sb.ToString();
                 WriteInLog(msg);
                 //Wyswietlenie okna czatu
-                ChatWindow chat = new ChatWindow(login, this);
+                chat = new ChatWindow(login, this);
                 chat.Show();
                 //BindingModule.AddChat(login, this);
             }
